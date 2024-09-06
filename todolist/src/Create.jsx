@@ -6,7 +6,7 @@ const Create = () => {
 
     const [task,setTask] = useState()
     const handleAdd = () => {
-       axios.post('http://localhost:3001/add', {task: task})
+       axios.post('https://todolist-backend-pgq8.onrender.com/add', {task: task})
        .then(result => location.reload())
        .catch(err => console.log(err))
     }
