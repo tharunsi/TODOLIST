@@ -1,0 +1,57 @@
+.home{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.create_form input{
+  width:300px;
+  padding: 10px;
+  border-bottom: 2px solid;
+  outline: none;
+}
+.create_form button{
+  padding: 10px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  width: 365px;
+  justify-content: space-between;
+  background-color: black;
+  color: #fff;
+  height:35px;
+  padding: 2px 5px 2px 5px;
+  margin-top: 3px;
+}
+
+.checkbox{
+  display: flex;
+  align-items: center;
+}
+
+.checkbox .icon{
+  margin-right: 5px;
+  font-size: 15px;
+}
+
+.task div span{
+  margin: 0px 5px 0px 4px;
+}
+
+.task div .icon{
+  cursor: pointer;
+}
+
+
+.line_through{
+   color: rgb(35, 241, 35);
+   text-transform: capitalize;
+}
+
+.icon_delete:hover{
+   color:red;
+}
