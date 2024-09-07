@@ -5,11 +5,18 @@ import axios from 'axios'
 const Create = () => {
 
     const [task,setTask] = useState()
-    const handleAdd = () => {
-       axios.post('https://todolist-backend-pgq8.onrender.com/add', {task: task})
-       .then(result => location.reload())
-       .catch(err => console.log(err))
-    }
+   
+    const handleAdd = async () => {
+      if (!task) return; // Prevent adding empty tasks
+      try {
+          const result = await axios.post('https://todolist-backend-pgq8.onrender.com/add', { task });
+          setTodos(prevTodos => [...prevTodos, result.data]);
+          setTask(''); // Clear the input field
+      } catch (err) {
+          console.log(err); // Handle any errors
+      }
+  };
+  
   return (
     <div className='create_form'>
       <input type="text" placeholder="Enter Task" onChange={(e) => setTask(e.target.value)}></input>

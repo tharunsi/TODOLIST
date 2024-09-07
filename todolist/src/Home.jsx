@@ -7,26 +7,35 @@ import { BsCircleFill, BsFillTrashFill,BsFillCheckCircleFill  } from 'react-icon
 const Home = () => {
     const [todos,setTodos] = useState([])
     useEffect(() => {
-        axios.get('https://todolist-backend-pgq8.onrender.com/get')
-        .then(result => setTodos(result.data))
-        .catch(err => console.log(err))
-    }, [])
+      const fetchTodos = async () => {
+          try {
+              const result = await axios.get('https://todolist-backend-pgq8.onrender.com/get');
+              setTodos(result.data); // Set the fetched todos in the state
+          } catch (err) {
+              console.log(err); // Handle any errors
+          }
+      };
+      fetchTodos();
+  }, []);
 
-    const handleEdit = (id) => {
-        axios.put('https://todolist-backend-pgq8.onrender.com/update/'+id)
-        .then(result => {
-            location.reload()
-        })
-        .catch(err => console.log(err))
+    const handleEdit = async (id) => {
+      try {
+          const result = await axios.put('https://todolist-backend-pgq8.onrender.com/update/' + id);
+          setTodos(prevTodos => prevTodos.map(todo => todo._id === id ? { ...todo, done: !todo.done } : todo));
+      } catch (err) {
+          console.log(err); // Handle any errors
+      }
+  };
+  
+  const handleDelete = async (id) => {
+    try {
+        const result = await axios.delete('https://todolist-backend-pgq8.onrender.com/delete/' + id);
+        setTodos(prevTodos => prevTodos.filter(todo => todo._id !== id));
+    } catch (err) {
+        console.log(err); // Handle any errors
     }
+};
 
-    const handleDelete = (id) => {
-        axios.delete('https://todolist-backend-pgq8.onrender.com/delete/'+id)
-        .then(result => {
-            location.reload()
-        })
-        .catch(err => console.log(err))
-    }
   return (
     <div className='home'>
       <h2>
